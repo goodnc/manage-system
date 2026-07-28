@@ -1,0 +1,10 @@
+{
+  "title": "文章管理系统",
+  "db": {
+    "name": "manage_sys",
+    "host": "localhost",
+    "port": 27017,
+    "user": "jack",
+    "password": "123456"
+  }
+}

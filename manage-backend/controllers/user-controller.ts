@@ -19,7 +19,7 @@ const list = async (req: Request, res: Response) => {
     searchObj.email = email;
   }
   // 将用户列表从数据库中查询出来
-  let users = await pagination(User)
+  let users = await pagination(UserModel)
     .find(searchObj)
     .sort({ createTime: -1 }) // 默认按照创建时间降序排列
     .page(page) // 指定当前页

@@ -1,3 +1,4 @@
+//user-controller.ts
 import { Application, Request, Response, NextFunction } from "express";
 // 导入用户集合构造函数
 import { UserModel, validateUser } from "../models/user";
@@ -5,6 +6,7 @@ import bcrypt from "bcryptjs";
 
 const pagination = require("mongoose-sex-page");
 // 用户列表
+// 根据用户名 / 邮箱模糊搜索，带分页、按创建时间倒序返回用户列表
 const list = async (req: Request, res: Response) => {
   let { email, username } = req.body;
   let pagerData = req.body.pagination;
@@ -12,6 +14,7 @@ const list = async (req: Request, res: Response) => {
   let page = pagerData ? pagerData.page : 1;
   let size = pagerData ? pagerData.pageSize : 10;
   let searchObj: any = {};
+  // 拼接搜索条件，有传参才加入过滤条件
   if (username) {
     searchObj.username = username;
   }
@@ -19,9 +22,10 @@ const list = async (req: Request, res: Response) => {
     searchObj.email = email;
   }
   // 将用户列表从数据库中查询出来
+  // 分页查询逻辑
   let users = await pagination(UserModel)
     .find(searchObj)
-    .sort({ createTime: -1 }) // 默认按照创建时间降序排列
+    .sort({ createTime: -1 }) // 创建时间倒序（最新用户在前）
     .page(page) // 指定当前页
     .size(size) // 指定每页显示条数
     .display(7) // 指定显示的分页条数
@@ -30,6 +34,8 @@ const list = async (req: Request, res: Response) => {
   return res.send(resData);
 };
 
+// 表单校验 + 邮箱唯一性校验 + 密码加盐加密入库操作
+// 加密原理：bcrypt 每次盐值随机，相同明文加密结果不同，盐值内置在密文字符串中，无需单独存储。
 const add = async (req: Request, res: Response, next: NextFunction) => {
   let resData = {
     code: 200,
@@ -82,7 +88,7 @@ const detail = async (req: Request, res: Response) => {
   // 如果当前传递了id参数
   if (id) {
     // 根据id查询用户详情
-    let user: any = await UserModel.findById({ _id: id });
+    let user: any = await UserModel.findOne({ _id: id });
     resData.data = user;
   }
   return res.send(resData);
@@ -130,9 +136,9 @@ const remove = async (req: Request, res: Response) => {
 };
 const registerRoutes = (app: Application) => {
   app.post("/user/list", list); // 用户列表
-  app.post("/user/detail", detail); // 用户详情
+  app.get("/user/detail", detail); // 用户详情
   app.post("/user/add", add); // 添加用户
   app.post("/user/edit", edit); // 编辑用户
-  app.post("/user/delete", remove); // 删除用户
+  app.get("/user/delete", remove); // 删除用户
 };
 export default { registerRoutes, list, add, detail, edit, remove };

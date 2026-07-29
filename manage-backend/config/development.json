@@ -5,6 +5,6 @@
     "host": "localhost",
     "port": 27017,
     "user": "jack",
-    "password": "123456"
+    "pwd": "123456"
   }
 }

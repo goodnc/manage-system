@@ -17,12 +17,12 @@ const HomeModel = model("Home", homeSchema);
 
 function initHomeData() {
   HomeModel.create({
-    login_user: 1024,
-    new_register: 12,
-    new_stu_course: 27,
-    new_stu_class: 64,
-    new_number: 31,
-    new_reply: 11,
+    login_user: "1024",
+    new_register: "12",
+    new_stu_course: "27",
+    new_stu_class: "64",
+    new_number: "31",
+    new_reply: "11",
     order_counter: 20,
   });
 }

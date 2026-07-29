@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import pinia from "./store/index.js";
+import pinia from "./store/index";
 import "./style.css";
 import App from "./App.vue";
 const app = createApp(App);

@@ -1,0 +1,8 @@
+/* css 变量，挂载根节点
+------------------------------- */
+:root,:host {
+    --color-white:white;
+    --color-info: #909399;
+    --text-color-primary:#dadada;
+    --text-color-secondary:#999;
+}

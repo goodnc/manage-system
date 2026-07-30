@@ -1,7 +1,10 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <HelloWorld />
+  <!-- <router-view /> -->
+  cms
 </template>
+
+<style lang="scss" scoped>
+@use "./assets/scss/base.scss" as *;
+</style>

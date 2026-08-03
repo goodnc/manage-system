@@ -21,7 +21,7 @@ import Sider from "./sider/Sider.vue";
 
 <style lang="scss" scoped>
 .ant-layout-content {
-  height: calc(100vh-128px);
+  height: calc(100vh - 128px);
   background: #fff;
   padding: 24px;
   margin: 0;

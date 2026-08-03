@@ -35,25 +35,25 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
         ],
       },
       {
-        path: "/courser",
-        name: "courser",
+        path: "/course",
+        name: "course",
         component: () => import("@/components/layout/sub-parent.vue"),
         meta: {
           title: "课程管理",
         },
-        redirect: "/courser/courser-list",
+        redirect: "/course/course-list",
         children: [
           {
-            path: "/courser/courser-list",
-            name: "courser-list",
+            path: "/course/course-list",
+            name: "course-list",
             component: () => import("@/views/course/course-list.vue"),
             meta: {
               title: "课程列表",
             },
           },
           {
-            path: "/courser/courser-category",
-            name: "courser-category",
+            path: "/course/course-category",
+            name: "course-category",
             component: () => import("@/views/course/course-category.vue"),
             meta: {
               title: "课程分类",

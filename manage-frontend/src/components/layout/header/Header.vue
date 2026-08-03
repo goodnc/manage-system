@@ -2,7 +2,7 @@
   <a-layout-header class="header">
     <span
       class="icon-btn"
-      @click="toggleCollapsed"
+      @click="toggleCollapse"
       :title="collapsed ? '展开' : '折叠'">
       <menu-unfold-outlined v-if="collapsed" class="trigger" />
       <menu-fold-outlined v-else class="trigger" />
@@ -24,7 +24,7 @@ import { useHomeStore } from "@/store/home";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
 const store = useHomeStore();
-const { toggleCollapsed } = store;
+const { toggleCollapse } = store;
 const { collapsed } = storeToRefs(store);
 const selectedKeys = ref<string[]>(["3"]);
 </script>

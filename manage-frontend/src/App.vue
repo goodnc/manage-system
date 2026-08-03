@@ -2,7 +2,7 @@
 
 <template>
   <router-view />
-  cms
+  <!-- cms -->
 </template>
 
 <style lang="scss" scoped>

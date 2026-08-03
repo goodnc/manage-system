@@ -9,6 +9,7 @@ export const useHomeStore = defineStore(
     // 控制面板的折叠展开
     const toggleCollapse = () => {
       collapsed.value = !collapsed.value;
+      console.log("collapsed", collapsed.value);
     };
 
     // 获取首页数据

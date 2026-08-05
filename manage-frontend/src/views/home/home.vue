@@ -46,4 +46,43 @@
     </a-row>
   </div>
 </template>
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { getHomeData } from "@/api/index";
+import { reactive, toRefs } from "vue";
+const state = reactive<any>({
+  login_user: 0,
+  new_register: 0,
+  new_stu_course: 0,
+  new_stu_classes: 0,
+  new_member: 0,
+  new_reply: 0,
+});
+const initData = () => {
+  getHomeData().then((res: any) => {
+    const {
+      login_user,
+      new_member,
+      new_register,
+      new_reply,
+      new_stu_classes,
+      new_stu_course,
+    } = res.data;
+    state.login_user = login_user;
+    state.new_register = new_register;
+    state.new_stu_course = new_stu_course;
+    state.new_stu_classes = new_stu_classes;
+    state.new_member = new_member;
+    state.new_reply = new_reply;
+  });
+};
+
+initData();
+const {
+  login_user,
+  new_register,
+  new_stu_course,
+  new_stu_classes,
+  new_member,
+  new_reply,
+} = toRefs(state);
+</script>

@@ -91,6 +91,7 @@ import { getTimeFormat } from "@/common/date";
 import { getUserListData, delUserRecord } from "@/api/index";
 import type { FormInstance } from "ant-design-vue";
 import { UserStatusObj, UserRoleObj, UserRoleType } from "@/common/comObj";
+import { ref } from "process";
 const { messageApi } = message.useMessage();
 interface FormState {
   username: string; // 用户名
@@ -101,6 +102,7 @@ const formState = reactive<FormState>({
   username: "",
   email: "",
 });
+
 const state: any = reactive({
   columns: [
     {
@@ -145,4 +147,52 @@ const state: any = reactive({
     total: 0,
   },
 });
+
+// 根据状态值获取状态对象（状态名称、状态颜色）
+const getStatus = (status: number) => {
+  return {
+    txt: UserStatusObj[status].text,
+    color: UserStatusObj[status].color,
+  };
+};
+
+// 编辑
+const onEdit = (record: any) => {
+  userAddRef.value!.showWin(record);
+};
+
+const userAddRef = ref();
+
+// 查询
+const onSearch = (params: any = {}) => {
+  state.loading = true;
+  getUserListData(params)
+    .then((res: any) => {
+      if (res.code === 200) {
+        state.tableData = res.data.records;
+        state.pagination = {
+          ...state.pagination,
+          total: res.data.total,
+        };
+      }
+    })
+    .finally(() => {
+      state.loading = false;
+    });
+};
+
+const formRef = ref<FormInstance>();
+
+// 重置表单
+const resetForm = () => {
+  formRef.value?.resetFields();
+};
+
+// 提交搜索表单
+const handleFinish = (values: FormState) => {
+  onSearch({
+    ...values,
+    pagination: state.pagination,
+  });
+};
 </script>

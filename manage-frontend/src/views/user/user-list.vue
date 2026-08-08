@@ -195,4 +195,32 @@ const handleFinish = (values: FormState) => {
     pagination: state.pagination,
   });
 };
+
+// 表格变化
+const handleTableChange: TableProps["onChange"] = (pagination, filters, sorter: any) => {
+  state.pagination = {
+    ...state.pagination
+  };
+  console.log('pagination', pagination)
+  onSearch({
+    pagination,
+    sortField: sorter.field,
+    sortOrder: sorter.order,
+    ...filters,
+  });
+};
+
+// 删除用户
+const onDelete = (id: number) => {
+  delUserRecord(id).then((res: any) => {
+    if (res.code === 200) {
+      messageApi
+}
+
+const userAddRef= ref();
+
+//新增
+const onAdd = () => {
+  userAddRef.value!.showWin();
+};
 </script>

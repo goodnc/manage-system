@@ -223,4 +223,26 @@ const userAddRef= ref();
 const onAdd = () => {
   userAddRef.value!.showWin();
 };
+
+// 刷新数据
+const refreshData = () => {
+    const { pagination } = state;
+    const params = {
+        pagination, ...formState
+    }
+  onSearch(params);
+};
+
+// 删除确认
+const delConfirm = async (row: any) => {
+    let res: any = await delUserRecord(row._id);
+    if (res.code === 200) {
+      messageApi.success("删除成功");
+      refreshData(); // 重新查询数据
+    }
+}
+refreshData(); // 初始化查询数据
 </script>
+<style lang="scss" scoped>
+@import "@/assets/scss/list.scss";
+</style>

@@ -90,4 +90,28 @@
     </a-form>
   </a-modal>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import {
+  UserOutlined,
+  MailOutlined,
+  LockOutlined,
+} from "@ant-design/icons-vue";
+import { addUser, editUser } from "@/api/index";
+import { message } from "ant-design-vue";
+import { UserRoleObj, UserStatusObj } from "@/common/comObj";
+import { reactive } from "vue";
+interface FormState {
+  username: string;
+  email: string;
+  password: string;
+  role: number;
+  status: number;
+  _id: any;
+}
+const state = reactive({
+  winTitle: "",
+  winVisible: false,
+  winLoading: false,
+  isEdit: false,
+});
+</script>
